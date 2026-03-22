@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Karar Sistemi</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding: 50px;
+    }
 
+    h2 {
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .yes { background: green; }
+    .no { background: red; }
+  </style>
+</head>
+<body>
+
+<h2 id="question">Güçlü bir duygu hissediyor musun?</h2>
+
+<div id="buttons">
+  <button class="yes" onclick="answer('yes')">Evet</button>
+  <button class="no" onclick="answer('no')">Hayır</button>
+</div>
+
+<script>
+let step = 1;
+
+function answer(choice) {
+
+  // 1. soru
+  if (step === 1) {
+    if (choice === 'yes') {
+      document.getElementById("question").innerText =
+        "Bu duygu kararını etkiliyor mu?";
+      step = 2;
+    } else {
+      document.getElementById("question").innerText =
+        "Bu fikir sana başka birinden mi geldi?";
+      step = 3;
+    }
+  }
+
+  // 2. soru
+  else if (step === 2) {
+    if (choice === 'yes') {
+      showResult("Duygu etkisi yüksek. Kararı ertele.");
+    } else {
+      document.getElementById("question").innerText =
+        "Bu fikir sana başka birinden mi geldi?";
+      step = 3;
+    }
+  }
+
+  // 3. soru
+  else if (step === 3) {
+    if (choice === 'yes') {
+      document.getElementById("question").innerText =
+        "O kişi olmasaydı yine bunu ister miydin?";
+      step = 4;
+    } else {
+      document.getElementById("question").innerText =
+        "Bu kararın mantıklı bir sebebi var mı?";
+      step = 5;
+    }
+  }
+
+  // 4. soru
+  else if (step === 4) {
+    if (choice === 'no') {
+      showResult("Bu karar sana ait değil.");
+    } else {
+      document.getElementById("question").innerText =
+        "Bu kararın mantıklı bir sebebi var mı?";
+      step = 5;
+    }
+  }
+
+  // 5. soru
+  else if (step === 5) {
+    if (choice === 'no') {
+      showResult("Mantık yok. Yeniden düşün.");
+    } else {
+      document.getElementById("question").innerText =
+        "Bu, olmak istediğin kişiyle uyumlu mu?";
+      step = 6;
+    }
+  }
+
+  // 6. soru
+  else if (step === 6) {
+    if (choice === 'no') {
+      showResult("Kimliğinle uyumsuz. Reddet.");
+    } else {
+      showResult("Kararın bağımsız ve mantıklı.");
+    }
+  }
+}
+
+function showResult(text) {
+  document.getElementById("question").innerText = text;
+  document.getElementById("buttons").innerHTML =
+    '<button onclick="location.reload()">Başa dön</button>';
+}
+</script>
+
+</body>
+</html>
