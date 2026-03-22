@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Therapy</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px;
+      background: #000;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 18px;
+      color: white;
+    }
+
+    .go-btn {
+      background: green;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    /* İçerik */
+    .container {
+      margin-top: 120px;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 40px;
+      font-size: 28px;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .yes { background: green; }
+    .no { background: red; }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="#" class="go-btn">Therapy</a>
+</div>
+
+<!-- Sistem -->
+<div class="container">
+  <h2 id="question">Güçlü bir duygu hissediyor musun?</h2>
+
+  <div id="buttons">
+    <button class="yes" onclick="answer('yes')">Evet</button>
+    <button class="no" onclick="answer('no')">Hayır</button>
+  </div>
+</div>
+
+<script>
+let step = 1;
+
+function answer(choice) {
+
+  if (step === 1) {
+    if (choice === 'yes') {
+      setQuestion("Bu duygu kararını etkiliyor mu?");
+      step = 2;
+    } else {
+      setQuestion("Bu fikir sana başka birinden mi geldi?");
+      step = 3;
+    }
+  }
+
+  else if (step === 2) {
+    if (choice === 'yes') {
+      showResult("Duygu etkisi yüksek. Kararı ertele.");
+    } else {
+      setQuestion("Bu fikir sana başka birinden mi geldi?");
+      step = 3;
+    }
+  }
+
+  else if (step === 3) {
+    if (choice === 'yes') {
+      setQuestion("O kişi olmasaydı yine bunu ister miydin?");
+      step = 4;
+    } else {
+      setQuestion("Bu kararın mantıklı bir sebebi var mı?");
+      step = 5;
+    }
+  }
+
+  else if (step === 4) {
+    if (choice === 'no') {
+      showResult("Bu karar sana ait değil.");
+    } else {
+      setQuestion("Bu kararın mantıklı bir sebebi var mı?");
+      step = 5;
+    }
+  }
+
+  else if (step === 5) {
+    if (choice === 'no') {
+      showResult("Mantık yok. Yeniden düşün.");
+    } else {
+      setQuestion("Bu, olmak istediğin kişiyle uyumlu mu?");
+      step = 6;
+    }
+  }
+
+  else if (step === 6) {
+    if (choice === 'no') {
+      showResult("Kimliğinle uyumsuz. Reddet.");
+    } else {
+      showResult("Kararın bağımsız ve mantıklı.");
+    }
+  }
+}
+
+function setQuestion(text) {
+  document.getElementById("question").innerText = text;
+}
+
+function showResult(text) {
+  document.getElementById("question").innerText = text;
+  document.getElementById("buttons").innerHTML =
+    '<button onclick="location.reload()">Başa dön</button>';
+}
+</script>
+
+</body>
+</html>
