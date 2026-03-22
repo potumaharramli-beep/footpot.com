@@ -2,120 +2,75 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Karar Sistemi</title>
+  <title>Therapy System</title>
+
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: #111;
       color: white;
-      font-family: Arial;
-      text-align: center;
-      padding: 50px;
     }
 
-    h2 {
-      margin-bottom: 40px;
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px;
+      background: #000;
     }
 
-    button {
-      padding: 15px 30px;
-      margin: 10px;
+    .navbar a {
+      text-decoration: none;
+      margin-left: 20px;
       font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+      color: white;
     }
 
-    .yes { background: green; }
-    .no { background: red; }
+    .go-btn {
+      background: green;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    /* Ortadaki tanıtım */
+    .container {
+      text-align: center;
+      margin-top: 150px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #ccc;
+      max-width: 600px;
+      margin: 20px auto;
+    }
   </style>
 </head>
+
 <body>
 
-<h2 id="question">Güçlü bir duygu hissediyor musun?</h2>
-
-<div id="buttons">
-  <button class="yes" onclick="answer('yes')">Evet</button>
-  <button class="no" onclick="answer('no')">Hayır</button>
+<!-- Navbar -->
+<div class="navbar">
+  <a href="#">Home</a>
+  <a href="therapy.html" class="go-btn">Go Therapy</a>
 </div>
 
-<script>
-let step = 1;
-
-function answer(choice) {
-
-  if (step === 1) {
-    if (choice === 'yes') {
-      document.getElementById("question").innerText =
-        "Bu duygu kararını etkiliyor mu?";
-      step = 2;
-    } else {
-      document.getElementById("question").innerText =
-        "Bu fikir sana başka birinden mi geldi?";
-      step = 3;
-    }
-  }
-
-  else if (step === 2) {
-    if (choice === 'yes') {
-      showResult("Duygu etkisi yüksek. Kararı ertele.");
-    } else {
-      document.getElementById("question").innerText =
-        "Bu fikir sana başka birinden mi geldi?";
-      step = 3;
-    }
-  }
-
-  // 3. soru
-  else if (step === 3) {
-    if (choice === 'yes') {
-      document.getElementById("question").innerText =
-        "O kişi olmasaydı yine bunu ister miydin?";
-      step = 4;
-    } else {
-      document.getElementById("question").innerText =
-        "Bu kararın mantıklı bir sebebi var mı?";
-      step = 5;
-    }
-  }
-
-  // 4. soru
-  else if (step === 4) {
-    if (choice === 'no') {
-      showResult("Bu karar sana ait değil.");
-    } else {
-      document.getElementById("question").innerText =
-        "Bu kararın mantıklı bir sebebi var mı?";
-      step = 5;
-    }
-  }
-
-  // 5. soru
-  else if (step === 5) {
-    if (choice === 'no') {
-      showResult("Mantık yok. Yeniden düşün.");
-    } else {
-      document.getElementById("question").innerText =
-        "Bu, olmak istediğin kişiyle uyumlu mu?";
-      step = 6;
-    }
-  }
-
-  // 6. soru
-  else if (step === 6) {
-    if (choice === 'no') {
-      showResult("Kimliğinle uyumsuz. Reddet.");
-    } else {
-      showResult("Kararın bağımsız ve mantıklı.");
-    }
-  }
-}
-
-function showResult(text) {
-  document.getElementById("question").innerText = text;
-  document.getElementById("buttons").innerHTML =
-    '<button onclick="location.reload()">Başa dön</button>';
-}
-</script>
+<!-- Tanıtım -->
+<div class="container">
+  <h1>Bağımsız Düşünme Sistemi</h1>
+  <p>
+    Bu sistem, başkalarının etkisinden çıkmana yardımcı olur.
+    Sorularla seni yönlendirmez, düşündürür.
+  </p>
+</div>
 
 </body>
 </html>
